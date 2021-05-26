@@ -1,10 +1,26 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 
+require("dotenv").config();
+
 const client = new Discord.Client();
+
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 
+const TOKEN = process.env.TOKEN;
+const prefix = process.env.prefix;
+
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args, client));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args, client));
+	}
+}
 const commandFolders = fs.readdirSync("./commands");
 
 for (const folder of commandFolders) {
@@ -18,14 +34,6 @@ for (const folder of commandFolders) {
     client.commands.set(command.name, command);
   }
 }
-require("dotenv").config();
-
-const TOKEN = process.env.TOKEN;
-const prefix = process.env.prefix;
-
-client.once("ready", () => {
-  console.log("Ready!");
-});
 client.on("message", (message) => {
 if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -33,12 +41,19 @@ if (!message.content.startsWith(prefix) || message.author.bot) return;
   const commandName = args.shift().toLocaleLowerCase();
 
   // return if no command
-
   const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	if (!command) return;
+//
+//
 
+	if (command.permissions) {
+		const authorPerms = message.channel.permissionsFor(message.author);
+		if(!authorPerms || !authorPerms.has(command.permissions)) {
+			return message.reply('You cannot do this.');
+		}
+	}
     if (command.args && !args.length) {
 		let reply = `You didn't provide any arguments, ${message.author}!`;
 
