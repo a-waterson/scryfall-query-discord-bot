@@ -1,9 +1,23 @@
+const fs = require('fs');
+// '<:manau:846176951835033680>'
 module.exports = {
     name: 'emoji',
     description: 'lists custom emojis',
     execute(message) {
-        const reactionEmoji = message.client.emojis.cache.find(emoji => emoji.name === 'manau');
-        // const status = client.
-            console.log(reactionEmoji.id);
+        const reactionEmoji = message.client.emojis.cache.map((emoji) => `"{${StringSlicer(emoji.name.slice(4))}}": "${emoji}",`).join('\n');
+        fs.writeFile('emojis.txt', reactionEmoji, function(err) {
+            if(err) { return console.error(err);
+            }
+            console.log('files saved');
+        });
+
+            console.log(reactionEmoji);
     },
 };
+
+function StringSlicer(string) {
+    if(string.length === 2 && (isNaN(string))) {
+        string = string.slice(0, 1) + '/' + string.slice(1, 2);
+    }
+        return string.toUpperCase();
+    }
