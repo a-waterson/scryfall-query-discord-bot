@@ -1,21 +1,19 @@
-const string = "{W} {U} {B} {R} {G}";
-
 const map = {
-"{W}": 0x000000,
-"{U}": 0xff7300,
-"{B}": 0xdedede,
-"{R}": 0x36d6d1,
-"{G}": 0xf250e7,
+"{W}": 16777214,
+"{U}": 3447003,
+"{B}": 2895667,
+"{R}": 15158332,
+"{G}": 3066993,
 };
-
 function colorPicker(str) {
     let matches = 0;
-    let newstr = 0x547a9c;
+    let newstr = 12370112;
    for (let index = 0; index < Object.keys(map).length; index++) {
-       if(str.contains(Object.keys(map)[index])) {
+       if(str.includes(Object.keys(map)[index])) {
            matches++;
            newstr = Object.values(map)[index];
        }
    }
-return (matches > 1) ? 0x3350d4 : newstr;
+return (matches > 1) ? 15844367 : newstr;
 }
+module.exports = { colorPicker };
