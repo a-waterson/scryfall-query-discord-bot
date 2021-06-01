@@ -5,6 +5,7 @@ const map = {
 "{R}": 15158332,
 "{G}": 3066993,
 };
+
 function colorPicker(str) {
     let matches = 0;
     let newstr = 12370112;

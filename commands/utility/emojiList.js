@@ -4,11 +4,12 @@ module.exports = {
     name: 'emoji',
     description: 'lists custom emojis',
     execute(message) {
-        const reactionEmoji = message.client.emojis.cache.map((emoji) => `"{${StringSlicer(emoji.name.slice(4))}}": "${emoji}",`).join('\n');
+        const reactionEmoji = message.client.emojis.cache.map((emoji) =>
+            `"{${StringSlicer(emoji.name.slice(4))}}": "${emoji}",`).join('\n');
         fs.writeFile('emojis.txt', reactionEmoji, function(err) {
             if(err) { return console.error(err);
             }
-            console.log('files saved');
+            console.log('file saved');
         });
 
             console.log(reactionEmoji);

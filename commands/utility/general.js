@@ -4,6 +4,7 @@ const { colorPicker } = require('../../functions/colorPicker');
 module.exports = {
     name: 'commander',
     description: 'fetches a commander with based on arguments',
+    aliases: ['general'],
     async execute(message, args) {
        try {
          let commander;

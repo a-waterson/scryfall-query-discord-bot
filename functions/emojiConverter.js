@@ -53,8 +53,8 @@ const map = {
 
 function emojiReplace(str) {
 for (let index = 0; index < Object.keys(map).length; index++) {
-    const regex = new RegExp('\\' + Object.keys(map)[index], 'g');
-    str = str.replace(regex, Object.values(map)[index]);
+    str = str.replace(RegExp('\\' + Object.keys(map)[index], 'g'),
+    Object.values(map)[index]);
     }
     return str;
 }
