@@ -23,7 +23,7 @@ const colorCombinations = {
 
 function matcher(str, map) {
     if (str in map) {
-        return map[str].toLowerCase();
+        return map[str];
     }
     return str;
 }

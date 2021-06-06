@@ -16,23 +16,19 @@ module.exports = {
          : commander = await fetch(`https://api.scryfall.com/cards/random?q=is%3Acommander+id%3D${search_parameters}`)
          .then(res => res.json()));
 
-         const embed_color = colorPicker(commander.mana_cost);
-         const mana_cost = emojiReplace(commander.mana_cost);
-         const card_text = emojiReplace(commander.oracle_text);
 
          const embed = {
-            // TODO: add color based on color identity.
-            title: `**${commander.name}** | ${mana_cost}`,
-            color: embed_color,
+            title: `**${commander.name}** | ${emojiReplace(commander.mana_cost)}`,
+            color: colorPicker(commander.mana_cost),
             fields: [
                {
                   name: `${commander.type_line}\n${commander.power}/${commander.toughness}`,
-                  value: `${card_text}`,
+                  value: `${emojiReplace(commander.oracle_text)}`,
                   inline: true,
                },
             ],
-            thumbnail: { url: commander.image_uris.art_crop, inline: true },
-            footer: { text: `${commander.flavor_text}\n` },
+            thumbnail: { url: commander.image_uris.png, inline: true },
+            footer: { text: `${(!commander.flavor_text) ? '\n' : commander.flavor_text}` },
        };
     message.channel.send({ embed: embed });
        } catch (error) {

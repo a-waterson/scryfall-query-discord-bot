@@ -3,6 +3,7 @@ const fs = require('fs');
 module.exports = {
     name: 'emoji',
     description: 'lists custom emojis',
+    dev: true,
     execute(message) {
         const reactionEmoji = message.client.emojis.cache.map((emoji) =>
             `"{${StringSlicer(emoji.name.slice(4))}}": "${emoji}",`).join('\n');

@@ -6,7 +6,6 @@ require("dotenv").config();
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
-
 const TOKEN = process.env.TOKEN;
 const prefix = process.env.prefix;
 
