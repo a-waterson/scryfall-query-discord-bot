@@ -1,0 +1,31 @@
+{
+  "name": "scryfall-query-discord-bot",
+  "version": "1.0.0",
+  "description": "discord bot that queries scryfall",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-waterson/scryfall-query-discord-bot.git"
+  },
+  "author": "Aidan Waterson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a-waterson/scryfall-query-discord-bot/issues"
+  },
+  "homepage": "https://github.com/a-waterson/scryfall-query-discord-bot#readme",
+  "dependencies": {
+    "canvas": "^2.8.0",
+    "discord.js": "^12.5.3",
+    "dotenv": "^9.0.2",
+    "merge-images": "^2.0.0",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "eslint": "^7.26.0"
+  }
+}
